@@ -10,6 +10,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+
 @RestController
 public class UserController {
 
@@ -24,5 +26,12 @@ public class UserController {
         return user;
     }
 
+    @GetMapping("/user/feed")
+    @PreAuthorize("hasRole('User')")
+    public HashMap<String , Object> isThisFeed(){
+
+        System.out.println("userRepository = " + userRepository);
+        return null;
+    }
 
 }
