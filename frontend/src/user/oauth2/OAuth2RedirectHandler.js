@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ACCESS_TOKEN } from '../../constants';
+import { JWT } from '../../constants';
 import { Redirect } from 'react-router-dom'
 
 class OAuth2RedirectHandler extends Component {
@@ -15,7 +15,7 @@ class OAuth2RedirectHandler extends Component {
         const token = this.getUrlParameter('token');
         const error = this.getUrlParameter('error');
         if(token) {
-            localStorage.setItem(ACCESS_TOKEN, token);
+            localStorage.setItem(JWT, token);
             return <Redirect to={{
                 pathname: "/profile",
                 state: { from: this.props.location }

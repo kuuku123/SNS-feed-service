@@ -1,12 +1,12 @@
-import { API_BASE_URL, ACCESS_TOKEN } from '../constants';
+import { API_BASE_URL, JWT } from '../constants';
 
 const request = (options) => {
     const headers = new Headers({
         'Content-Type': 'application/json',
     })
     
-    if(localStorage.getItem(ACCESS_TOKEN)) {
-        headers.append('Authorization', 'Bearer ' + localStorage.getItem(ACCESS_TOKEN))
+    if(localStorage.getItem(JWT)) {
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem(JWT))
     }
 
     const defaults = {headers: headers};
@@ -24,7 +24,7 @@ const request = (options) => {
 };
 
 export function getCurrentUser() {
-if(!localStorage.getItem(ACCESS_TOKEN)) {
+if(!localStorage.getItem(JWT)) {
         return Promise.reject("No access token set.");
     }
 
@@ -48,4 +48,8 @@ export function signup(signupRequest) {
         method: 'POST',
         body: JSON.stringify(signupRequest)
     });
+}
+
+export function feedCall(){
+    
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Login.css';
-import { GOOGLE_AUTH_URL, FACEBOOK_AUTH_URL, GITHUB_AUTH_URL, ACCESS_TOKEN } from '../../constants';
+import { GOOGLE_AUTH_URL, FACEBOOK_AUTH_URL, GITHUB_AUTH_URL, JWT } from '../../constants';
 import { login } from '../../util/APIUtils';
 import { Link, Redirect } from 'react-router-dom'
 import fbLogo from '../../img/fb-logo.png';
@@ -95,7 +95,7 @@ class LoginForm extends Component {
         login(loginRequest)
         .then(response => {
             console.log("itworked")
-            localStorage.setItem(ACCESS_TOKEN, response.accessToken);
+            localStorage.setItem(JWT, response.accessToken);
             Alert.success("You're successfully logged in!");
             this.props.history.push("/");
         }).catch(error => {
