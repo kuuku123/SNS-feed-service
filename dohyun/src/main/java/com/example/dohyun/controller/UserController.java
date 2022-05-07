@@ -27,7 +27,7 @@ public class UserController {
     }
 
     @GetMapping("/user/feed")
-    @PreAuthorize("hasRole('User')")
+    @PreAuthorize("hasRole('USER')")
     public HashMap<String , Object> isThisFeed(){
 
         System.out.println("userRepository = " + userRepository);

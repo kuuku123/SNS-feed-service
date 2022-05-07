@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { feedCall } from '../../util/APIUtils';
 import "./Profile.css";
 
 class Profile extends Component {
@@ -8,7 +9,7 @@ class Profile extends Component {
   }
   handleOnClick(event) {
       event.preventDefault();
-      
+      feedCall()
   }
   render() {
     return (

@@ -103,7 +103,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.gif",
                         "/**/*.svg",
                         "/**/*.jpg",
-                        "/**/*.html",
                         "/**/*.css",
                         "/**/*.js")
                         .permitAll()

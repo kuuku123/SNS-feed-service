@@ -51,5 +51,15 @@ export function signup(signupRequest) {
 }
 
 export function feedCall(){
-    
+    return request({
+        url: API_BASE_URL + "/user/feed",
+        method: 'GET'
+    });
+}
+
+export function oauthCall(given_url) {
+    return request({
+        url: given_url,
+        method: 'GET'
+    })
 }
