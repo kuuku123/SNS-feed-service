@@ -47,13 +47,6 @@ class Login extends Component {
         <div className="login-content">
           <h1 className="login-title">Login to SpringSocial</h1>
           <SocialLogin />
-          <div className="or-separator">
-            <span className="or-text">OR</span>
-          </div>
-          <LoginForm {...this.props} />
-          <span className="signup-link">
-            New user? <Link to="/signup">Sign up!</Link>
-          </span>
         </div>
       </div>
     );
@@ -75,9 +68,6 @@ class SocialLogin extends Component {
           href={FACEBOOK_AUTH_URL}
         >
           <img src={fbLogo} alt="Facebook" /> Log in with Facebook
-        </a>
-        <a className="btn btn-block social-btn github" href={GITHUB_AUTH_URL}>
-          <img src={githubLogo} alt="Github" /> Log in with Github
         </a>
       </div>
     );
