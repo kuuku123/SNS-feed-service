@@ -3,7 +3,7 @@
 
 ## 사용법
 
-docker-compose.yml 파일만 복붙해서 docker-compose up 으로 실행하면 됩니다. mysql이 좀 늦게 뜨니 기다려야 합니다.
+docker-compose.yml 파일만 복붙해서 docker-compose up 으로 실행하면 됩니다. mysql이 좀 늦게 뜨니 기다려야 합니다. chrome 시크릿창으로 해야합니다.
 
 이후 localhost:3000 접속 -> facebook 로그인 -> 로그인 정보입력 -> 로그인창에 다시오게되는데 refresh를 해줘야함 -> profile로 오면 feed request 버튼을 눌러 console창에 정보가 뜨는것을 확인
 
