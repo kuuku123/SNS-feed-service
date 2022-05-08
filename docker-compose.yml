@@ -1,14 +1,27 @@
 version: "3"
 
 services:
-    db:
-        image: kuuku123/ipl-dashboard:mysql
-        container_name: mysql-server
+    frontend:
+        image: kuuku123/skt:frontend
         ports:
-                - "3307:3306"
-        #environment:
-        #- MYSQL_DATABASE=ipl_dashboard
-        #- MYSQL_ROOT_PASSWORD=1234
-        #- TZ=Asia/Seoul
+            - "3000:3000"
+        depends_on:
+            - backend
+
+    backend:
+        container_name: backend
+        restart: on-failure
+        image: kuuku123/skt:backend
+        ports:
+            - "8300:8300"
+        environment:
+            MYSQL_HOST: mysql-server
+            MYSQL_PORT: 3306
+        depends_on:
+            - mysql-server
+
+    db:
+        image: kuuku123/skt:mysql
+        container_name: mysql-server
 
 
