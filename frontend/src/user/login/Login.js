@@ -47,6 +47,13 @@ class Login extends Component {
         <div className="login-content">
           <h1 className="login-title">Login to SpringSocial</h1>
           <SocialLogin />
+          <div className="or-separator">
+            <span className="or-text">OR</span>
+          </div>
+          <LoginForm {...this.props} />
+          <span className="signup-link">
+            New user? <Link to="/signup">Sign up!</Link>
+          </span>
         </div>
       </div>
     );
@@ -57,10 +64,7 @@ class SocialLogin extends Component {
   render() {
     return (
       <div className="social-login">
-        <a
-          className="btn btn-block social-btn google"
-          href={GOOGLE_AUTH_URL}
-        >
+        <a className="btn btn-block social-btn google" href={GOOGLE_AUTH_URL}>
           <img src={googleLogo} alt="Google" /> Log in with Google
         </a>
         <a
