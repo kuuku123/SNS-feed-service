@@ -2,7 +2,7 @@ version: "3"
 
 services:
     frontend:
-        image: kuuku123/skt:frontend
+        image: kuuku123/sns-feedservice:frontend
         ports:
             - "3000:3000"
         depends_on:
@@ -11,7 +11,7 @@ services:
     backend:
         container_name: backend
         restart: on-failure
-        image: kuuku123/skt:backend
+        image: kuuku123/sns-feedservice:backend
         ports:
             - "8300:8300"
         environment:
@@ -21,7 +21,7 @@ services:
             - mysql-server
 
     db:
-        image: kuuku123/skt:mysql
+        image: kuuku123/sns-feedservice:mysql
         container_name: mysql-server
 
 
