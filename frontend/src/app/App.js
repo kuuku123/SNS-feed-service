@@ -30,17 +30,20 @@ class App extends Component {
 
     this.loadCurrentlyLoggedInUser = this.loadCurrentlyLoggedInUser.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+    console.log("App con called")
   }
 
   loadCurrentlyLoggedInUser() {
     getCurrentUser()
     .then(response => {
+      console.log(response)
       this.setState({
         currentUser: response,
         authenticated: true,
         loading: false
       });
     }).catch(error => {
+      console.log(error)
       this.setState({
         loading: false
       });  
@@ -57,6 +60,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    console.log("com did mount")
     this.loadCurrentlyLoggedInUser();
   }
 
