@@ -29,9 +29,6 @@ class OAuth2RedirectHandler extends Component {
           }}
         />
       );
-      // return (
-      //     <a href='/profile'> gg </a>
-      // )
     } else {
       return (
         <Redirect

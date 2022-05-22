@@ -98,6 +98,8 @@ class LoginForm extends Component {
       [inputName]: inputValue,
     });
   }
+    componentDidMount() {
+  }
 
   handleSubmit(event) {
     event.preventDefault();
@@ -109,6 +111,7 @@ class LoginForm extends Component {
         console.log("itworked");
         localStorage.setItem(JWT, response.accessToken);
         Alert.success("You're successfully logged in!");
+        this.props.loadCurrentlyLoggedInUser()
         this.props.history.push("/");
       })
       .catch((error) => {
