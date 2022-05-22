@@ -1,5 +1,7 @@
-package com.example.dohyun.security;
+package com.example.dohyun.security.filter;
 
+import com.example.dohyun.security.CustomUserDetailsService;
+import com.example.dohyun.service.TokenProviderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +18,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
-    private TokenProvider tokenProvider;
+    private TokenProviderService tokenProviderService;
 
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
@@ -31,8 +34,8 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         try {
             String jwt = getJwtFromRequest(request);
 
-            if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
-                Long userId = tokenProvider.getUserIdFromToken(jwt);
+            if (StringUtils.hasText(jwt) && tokenProviderService.validateToken(jwt)) {
+                Long userId = tokenProviderService.getUserIdFromToken(jwt);
 
                 UserDetails userDetails = customUserDetailsService.loadUserById(userId);
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
@@ -53,5 +56,10 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
             return bearerToken.substring(7, bearerToken.length());
         }
         return null;
+    }
+
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        return request.getServletPath().equals("/auth/signup");
     }
 }

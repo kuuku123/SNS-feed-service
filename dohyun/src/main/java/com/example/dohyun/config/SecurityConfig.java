@@ -1,6 +1,8 @@
 package com.example.dohyun.config;
 
 import com.example.dohyun.security.*;
+import com.example.dohyun.security.filter.EmailPasswordAuthenticationFilter;
+import com.example.dohyun.security.filter.TokenAuthenticationFilter;
 import com.example.dohyun.security.oauth2.CustomOAuth2UserService;
 import com.example.dohyun.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
 import com.example.dohyun.security.oauth2.OAuth2AuthenticationFailureHandler;
@@ -29,6 +31,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 )
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
 
@@ -47,6 +50,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public TokenAuthenticationFilter tokenAuthenticationFilter() {
         return new TokenAuthenticationFilter();
+    }
+    @Bean
+    public EmailPasswordAuthenticationFilter emailPasswordAuthenticationFilter() {
+        return new EmailPasswordAuthenticationFilter();
     }
 
     /*
@@ -127,5 +134,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         // Add our custom Token based authentication filter
         http.addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterAfter(emailPasswordAuthenticationFilter(),TokenAuthenticationFilter.class);
     }
 }

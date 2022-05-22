@@ -1,15 +1,19 @@
 package com.example.dohyun.service;
 
+import com.example.dohyun.exception.BadRequestException;
 import com.example.dohyun.exception.ResourceNotFoundException;
+import com.example.dohyun.model.AuthProvider;
 import com.example.dohyun.model.User;
 import com.example.dohyun.model.dto.UserMeDto;
 import com.example.dohyun.model.dto.UserMetaDataDto;
 import com.example.dohyun.model.dto.UserPictureDto;
+import com.example.dohyun.payload.SignUpRequest;
 import com.example.dohyun.repository.UserRepository;
 import com.example.dohyun.security.UserPrincipal;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -22,6 +26,25 @@ import java.util.LinkedHashMap;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    public User signUpUser(SignUpRequest signUpRequest) {
+
+        if(userRepository.existsByEmail(signUpRequest.getEmail())) {
+            throw new BadRequestException("Email address already in use.");
+        }
+
+        // Creating user's account
+        User user = new User();
+        user.setName(signUpRequest.getName());
+        user.setEmail(signUpRequest.getEmail());
+        user.setPassword(signUpRequest.getPassword());
+        user.setProvider(AuthProvider.local);
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        User result = userRepository.save(user);
+        return result;
+    }
 
     public User getUserById(UserPrincipal userPrincipal) {
         User user = userRepository.findById(userPrincipal.getId())

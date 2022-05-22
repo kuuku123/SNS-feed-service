@@ -2,7 +2,7 @@ package com.example.dohyun.security.oauth2;
 
 import com.example.dohyun.config.AppProperties;
 import com.example.dohyun.exception.BadRequestException;
-import com.example.dohyun.security.TokenProvider;
+import com.example.dohyun.service.TokenProviderService;
 import com.example.dohyun.util.CookieUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -24,7 +24,7 @@ import static com.example.dohyun.security.oauth2.HttpCookieOAuth2AuthorizationRe
 @RequiredArgsConstructor
 public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-    private final TokenProvider tokenProvider;
+    private final TokenProviderService tokenProviderService;
     private final AppProperties appProperties;
     private final HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
 
@@ -52,7 +52,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
         String targetUrl = redirectUri.orElse(getDefaultTargetUrl());
 
-        String token = tokenProvider.createToken(authentication);
+        String token = tokenProviderService.createToken(authentication);
 
         return UriComponentsBuilder.fromUriString(targetUrl)
                 .queryParam("token", token)

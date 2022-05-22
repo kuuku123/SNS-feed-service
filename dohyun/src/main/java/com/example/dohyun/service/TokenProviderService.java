@@ -1,6 +1,7 @@
-package com.example.dohyun.security;
+package com.example.dohyun.service;
 
 import com.example.dohyun.config.AppProperties;
+import com.example.dohyun.security.UserPrincipal;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,13 +11,13 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 
 @Service
-public class TokenProvider {
+public class TokenProviderService {
 
-    private static final Logger logger = LoggerFactory.getLogger(TokenProvider.class);
+    private static final Logger logger = LoggerFactory.getLogger(TokenProviderService.class);
 
     private AppProperties appProperties;
 
-    public TokenProvider(AppProperties appProperties) {
+    public TokenProviderService(AppProperties appProperties) {
         this.appProperties = appProperties;
     }
 

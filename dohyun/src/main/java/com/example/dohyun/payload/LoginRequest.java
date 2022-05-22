@@ -1,11 +1,17 @@
 package com.example.dohyun.payload;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 /**
  * Created by rajeevkumarsingh on 02/08/17.
  */
+@Getter
+@Setter
 public class LoginRequest {
     @NotBlank
     @Email
