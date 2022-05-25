@@ -35,6 +35,7 @@ if(!localStorage.getItem(JWT)) {
 }
 
 export function login(loginRequest) {
+    console.log(loginRequest +" loginRequest ")
     return request({
         url: API_BASE_URL + "/auth/login",
         method: 'POST',
